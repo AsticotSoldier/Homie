@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Rez de Chaussée">
+        <menu>
+            <item
+                android:id="@+id/nav_camera"
+                android:icon="@drawable/kitchen"
+                android:title="Cuisine" />
+            <item
+                android:id="@+id/nav_gallery"
+                android:icon="@drawable/salon"
+                android:title="Salon" />
+            <item
+                android:id="@+id/nav_slideshow"
+                android:icon="@drawable/manger"
+                android:title="Salle à manger" />
+            <item
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/garage"
+                android:title="Garage" />
+            <item
+                android:id="@+id/nav"
+                android:icon="@drawable/garden"
+                android:title="Jardin" />
+        </menu>
+    </item>
+
+    <item android:title="1er Etage">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/bed"
+                android:title="Chambre" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/bathroom"
+                android:title="Salle de bain" />
+        </menu>
+    </item>
+
+</menu>
