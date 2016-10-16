@@ -13,4 +13,5 @@
         android:layout_height="25dp"
         android:src="@drawable/salon"
         android:id="@+id/imageView2" />
+
 </FrameLayout>

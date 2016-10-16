@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Layout;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.FragmentManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class Accueil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,frag_kitchen.OnFragmentInteractionListener,
@@ -62,7 +65,7 @@ public class Accueil extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager frag_manag = getSupportFragmentManager();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -77,27 +80,38 @@ public class Accueil extends AppCompatActivity
         // Handle navigation view item clicks here.
         Toolbar toolbar_activity;
         toolbar_activity= (Toolbar) findViewById(R.id.toolbar);
+
+        RelativeLayout def_relative_layout;
+        def_relative_layout= (RelativeLayout) findViewById(R.id.content_accueil);
+
         int id = item.getItemId();
         FragmentManager frag_manag = getSupportFragmentManager();
         if (id == R.id.kitchen) {
             toolbar_activity.setTitle("Cuisine");
+            def_relative_layout.setVisibility(View.INVISIBLE);
             frag_manag.beginTransaction().replace(R.id.default_layout, new frag_kitchen()).commit();
         } else if (id == R.id.salon) {
+            def_relative_layout.setVisibility(View.INVISIBLE);
             toolbar_activity.setTitle("Salon");
             frag_manag.beginTransaction().replace(R.id.default_layout, new frag_salon()).commit();
         } else if (id == R.id.restroom) {
+            def_relative_layout.setVisibility(View.INVISIBLE);
             toolbar_activity.setTitle("Salle à manger");
             frag_manag.beginTransaction().replace(R.id.default_layout, new frag_restroom()).commit();
         } else if (id == R.id.garage) {
+            def_relative_layout.setVisibility(View.INVISIBLE);
             toolbar_activity.setTitle("Garage");
             frag_manag.beginTransaction().replace(R.id.default_layout, new frag_garage()).commit();
         } else if (id == R.id.garden) {
+            def_relative_layout.setVisibility(View.INVISIBLE);
             toolbar_activity.setTitle("Jardin");
             frag_manag.beginTransaction().replace(R.id.default_layout, new frag_garden()).commit();
         } else if (id == R.id.bedroom) {
+            def_relative_layout.setVisibility(View.INVISIBLE);
             toolbar_activity.setTitle("Chambre");
             frag_manag.beginTransaction().replace(R.id.default_layout, new frag_bedroom()).commit();
         } else if (id == R.id.bathroom) {
+            def_relative_layout.setVisibility(View.INVISIBLE);
             toolbar_activity.setTitle("Salle de bain");
             frag_manag.beginTransaction().replace(R.id.default_layout, new frag_bathroom()).commit();
         }
