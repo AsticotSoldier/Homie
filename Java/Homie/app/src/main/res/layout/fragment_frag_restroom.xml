@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="aramanth.homie.frag_restroom">
+
+
+    <TextView
+        android:text="Il n'y a pas encore de périphérique pour cet espace de la maison"
+        android:layout_width="wrap_content"
+        android:layout_height="342dp"
+        android:id="@+id/textView2"
+        android:gravity="fill_vertical|center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="..."
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textView3"
+        android:gravity="center"
+        android:textSize="30sp" />
+
+    <TextView
+        android:text="Nos plus plates excuses pour ce faux espoir de technologie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textView4"
+        android:gravity="bottom|center_horizontal"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:src="@drawable/manger"
+        android:id="@+id/imageView2" />
+
+</FrameLayout>

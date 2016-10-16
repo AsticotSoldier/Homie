@@ -3,39 +3,43 @@
 
     <item android:title="Rez de Chaussée">
         <menu>
-            <item
-                android:id="@+id/nav_camera"
-                android:icon="@drawable/kitchen"
-                android:title="Cuisine" />
-            <item
-                android:id="@+id/nav_gallery"
-                android:icon="@drawable/salon"
-                android:title="Salon" />
-            <item
-                android:id="@+id/nav_slideshow"
-                android:icon="@drawable/manger"
-                android:title="Salle à manger" />
-            <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/garage"
-                android:title="Garage" />
-            <item
-                android:id="@+id/nav"
-                android:icon="@drawable/garden"
-                android:title="Jardin" />
+            <group>
+                <item
+                    android:id="@+id/kitchen"
+                    android:icon="@drawable/kitchen"
+                    android:title="Cuisine" />
+                <item
+                    android:id="@+id/salon"
+                    android:icon="@drawable/salon"
+                    android:title="Salon" />
+                <item
+                    android:id="@+id/restroom"
+                    android:icon="@drawable/manger"
+                    android:title="Salle à manger" />
+                <item
+                    android:id="@+id/garage"
+                    android:icon="@drawable/garage"
+                    android:title="Garage" />
+                <item
+                    android:id="@+id/garden"
+                    android:icon="@drawable/garden"
+                    android:title="Jardin" />
+            </group>
         </menu>
     </item>
 
     <item android:title="1er Etage">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/bed"
-                android:title="Chambre" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/bathroom"
-                android:title="Salle de bain" />
+            <group>
+                <item
+                    android:id="@+id/bedroom"
+                    android:icon="@drawable/bed"
+                    android:title="Chambre" />
+                <item
+                    android:id="@+id/bathroom"
+                    android:icon="@drawable/bathroom"
+                    android:title="Salle de bain" />
+            </group>
         </menu>
     </item>
 
