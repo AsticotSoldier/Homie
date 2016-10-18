@@ -9,4 +9,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="device_salon">
+        <item>-- Choisir un périphérique --</item>
+        <item>Orbe à LED</item>
+    </string-array>
+
 </resources>

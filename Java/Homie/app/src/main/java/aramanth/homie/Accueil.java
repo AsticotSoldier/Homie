@@ -1,6 +1,11 @@
 package aramanth.homie;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.AvoidXfermode;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +21,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.FragmentManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -31,6 +38,47 @@ public class Accueil extends AppCompatActivity
         setContentView(R.layout.activity_accueil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final Button favoris;
+        favoris = (Button) findViewById(R.id.favor_button);
+        final Button viewed;
+        viewed = (Button) findViewById(R.id.most_view_button);
+        final Button recently;
+        recently = (Button) findViewById(R.id.recently_button);
+
+        favoris.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewed.setBackgroundColor(Color.TRANSPARENT);
+                viewed.setTextColor(Color.rgb(144,198,82));
+                favoris.setBackgroundColor(Color.rgb(144,198,82));
+                favoris.setTextColor(Color.WHITE);
+                recently.setBackgroundColor(Color.TRANSPARENT);
+                recently.setTextColor(Color.rgb(144,198,82));
+            }
+        });
+        recently.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewed.setBackgroundColor(Color.TRANSPARENT);
+                viewed.setTextColor(Color.rgb(144,198,82));
+                recently.setBackgroundColor(Color.rgb(144,198,82));
+                recently.setTextColor(Color.WHITE);
+                favoris.setBackgroundColor(Color.TRANSPARENT);
+                favoris.setTextColor(Color.rgb(144,198,82));
+            }
+        });
+        viewed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                favoris.setBackgroundColor(Color.TRANSPARENT);
+                favoris.setTextColor(Color.rgb(144,198,82));
+                viewed.setBackgroundColor(Color.rgb(144,198,82));
+                viewed.setTextColor(Color.WHITE);
+                recently.setBackgroundColor(Color.TRANSPARENT);
+                recently.setTextColor(Color.rgb(144,198,82));
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

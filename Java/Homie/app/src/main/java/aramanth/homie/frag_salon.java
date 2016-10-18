@@ -83,6 +83,7 @@ public class frag_salon extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
     }
 
     @Override
