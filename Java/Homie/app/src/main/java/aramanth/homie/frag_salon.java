@@ -1,12 +1,22 @@
 package aramanth.homie;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.Inflater;
 
 
 /**
@@ -28,6 +38,7 @@ public class frag_salon extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private Inflater inflater;
 
     public frag_salon() {
         // Required empty public constructor
@@ -58,13 +69,57 @@ public class frag_salon extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag_salon, container, false);
+
+        //--------------
+        View view = inflater.inflate(R.layout.fragment_frag_salon, container, false);
+        Spinner spinner_salon = (Spinner) view.findViewById(R.id.spinner_device_salon);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.device_salon)) {
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent)
+            {
+                View view = super.getView(position, convertView, parent);
+
+                TextView text = (TextView)view.findViewById(android.R.id.text1);
+                text.setTextColor(Color.rgb(144,198,82));
+
+                return view;
+
+            }
+        };
+        final Button connect_button= (Button) view.findViewById(R.id.connect_button_salon);
+
+        spinner_salon.setAdapter(spinnerAdapter);
+        spinner_salon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView texte_select =(TextView) parent.getChildAt(0);
+                if (texte_select!=null){
+                    texte_select.setTextColor(Color.rgb(144,198,82));
+                                  }
+                if (position!=0){
+                    texte_select.setTextColor(Color.rgb(144,198,82));
+                    connect_button.setVisibility(View.VISIBLE);
+                }
+                else {
+                    connect_button.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
