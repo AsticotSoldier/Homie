@@ -1,10 +1,22 @@
 package aramanth.homie;
 
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.le.BluetoothLeScanner;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +28,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.Manifest;
 import java.util.zip.Inflater;
 
 
@@ -40,8 +53,14 @@ public class frag_salon extends Fragment {
     private OnFragmentInteractionListener mListener;
     private Inflater inflater;
 
+    private BluetoothAdapter BLE_adaptater;
+    private BluetoothLeScanner BLE_scan;
+    private BluetoothGatt mGatt;
+    private BluetoothDevice BLE_device;
+    private BluetoothGattService BLE_service;
+    private BluetoothGattCharacteristic txCarac;
+
     public frag_salon() {
-        // Required empty public constructor
     }
 
     /**
@@ -103,14 +122,39 @@ public class frag_salon extends Fragment {
                 TextView texte_select =(TextView) parent.getChildAt(0);
                 if (texte_select!=null){
                     texte_select.setTextColor(Color.rgb(144,198,82));
-                                  }
+                }
                 if (position!=0){
                     texte_select.setTextColor(Color.rgb(144,198,82));
                     connect_button.setVisibility(View.VISIBLE);
-                }
+                                  }
                 else {
                     connect_button.setVisibility(View.INVISIBLE);
                 }
+                connect_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+Log.i("STATE","connextion clic");
+                        BLE_adaptater=BluetoothAdapter.getDefaultAdapter();
+                        BLE_adaptater.enable();
+                        BLE_scan=BLE_adaptater.getBluetoothLeScanner();
+
+                        if (ContextCompat.checkSelfPermission(v.getContext(),
+                                android.Manifest.permission.ACCESS_FINE_LOCATION)!=
+                        PackageManager.PERMISSION_GRANTED){
+                            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) v.getContext(),
+                                    android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                            }else {
+                                ActivityCompat.requestPermissions(this,
+                                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                                        RequestLocationId);
+                            }
+                        }
+                    }
+
+
+                });
 
             }
 
@@ -121,6 +165,8 @@ public class frag_salon extends Fragment {
         });
         return view;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
