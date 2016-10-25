@@ -1,7 +1,9 @@
 package aramanth.homie;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.AvoidXfermode;
 import android.graphics.Color;
@@ -10,6 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.Layout;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,23 +21,48 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothProfile;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
+import android.content.pm.PackageManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.FragmentManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class Accueil extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,frag_kitchen.OnFragmentInteractionListener,
+
+    implements NavigationView.OnNavigationItemSelectedListener,frag_kitchen.OnFragmentInteractionListener,
         frag_salon.OnFragmentInteractionListener,frag_restroom.OnFragmentInteractionListener,
         frag_garage.OnFragmentInteractionListener,frag_garden.OnFragmentInteractionListener,
         frag_bedroom.OnFragmentInteractionListener,frag_bathroom.OnFragmentInteractionListener{
 
+    private  BluetoothAdapter BLE_Adaptater;
+    private BluetoothLeScanner BLE_scan;
+    private BluetoothGatt mGatt;
+    private BluetoothDevice BLE_device;
+    private BluetoothGattService Ble_service;
+    private BluetoothGattCharacteristic txCarac;
+
+    private EditText editText;
+    private TextView receiveText;
+
+    private static final int RequestLocationId = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +112,22 @@ public class Accueil extends AppCompatActivity
             }
         });
 //-----------------
+// autorisation
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        RequestLocationId);
+            }
+        } else {
 
-
-
+           // BLE_scan.startScan(mScanCallback);
+        }
+//-----
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

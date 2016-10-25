@@ -106,7 +106,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="b2b048709f32b303d2935c9d89c7e43939234cbe">
+        sha1="6235c2e9d93556082fbdfd52e2cb2704a01b56e5">
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_4ccf1a74ea1a3648c1235d299814c9574e133cff\classes.dex" />
     </item>
 

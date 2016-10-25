@@ -53,12 +53,7 @@ public class frag_salon extends Fragment {
     private OnFragmentInteractionListener mListener;
     private Inflater inflater;
 
-    private BluetoothAdapter BLE_adaptater;
-    private BluetoothLeScanner BLE_scan;
-    private BluetoothGatt mGatt;
-    private BluetoothDevice BLE_device;
-    private BluetoothGattService BLE_service;
-    private BluetoothGattCharacteristic txCarac;
+
 
     public frag_salon() {
     }
@@ -130,32 +125,6 @@ public class frag_salon extends Fragment {
                 else {
                     connect_button.setVisibility(View.INVISIBLE);
                 }
-                connect_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-Log.i("STATE","connextion clic");
-                        BLE_adaptater=BluetoothAdapter.getDefaultAdapter();
-                        BLE_adaptater.enable();
-                        BLE_scan=BLE_adaptater.getBluetoothLeScanner();
-
-                        if (ContextCompat.checkSelfPermission(v.getContext(),
-                                android.Manifest.permission.ACCESS_FINE_LOCATION)!=
-                        PackageManager.PERMISSION_GRANTED){
-                            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) v.getContext(),
-                                    android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                            }else {
-                                ActivityCompat.requestPermissions(this,
-                                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                                        RequestLocationId);
-                            }
-                        }
-                    }
-
-
-                });
-
             }
 
             @Override
