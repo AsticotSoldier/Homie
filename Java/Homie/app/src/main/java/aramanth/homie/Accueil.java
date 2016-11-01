@@ -52,12 +52,12 @@ public class Accueil extends AppCompatActivity
         frag_garage.OnFragmentInteractionListener,frag_garden.OnFragmentInteractionListener,
         frag_bedroom.OnFragmentInteractionListener,frag_bathroom.OnFragmentInteractionListener{
 
-    private  BluetoothAdapter BLE_Adaptater;
-    private BluetoothLeScanner BLE_scan;
-    private BluetoothGatt mGatt;
-    private BluetoothDevice BLE_device;
-    private BluetoothGattService Ble_service;
-    private BluetoothGattCharacteristic txCarac;
+    public static  BluetoothAdapter BLE_Adapter;
+    public static BluetoothLeScanner BLE_scan;
+    public static BluetoothGatt mGatt;
+    public static BluetoothDevice BLE_device;
+    public static BluetoothGattService BLE_service;
+    private static BluetoothGattCharacteristic txCarac;
 
     private EditText editText;
     private TextView receiveText;
@@ -113,6 +113,10 @@ public class Accueil extends AppCompatActivity
         });
 //-----------------
 // autorisation
+        BLE_Adapter = BluetoothAdapter.getDefaultAdapter();
+        BLE_Adapter.enable();
+        BLE_scan = BLE_Adapter.getBluetoothLeScanner();
+
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -125,7 +129,7 @@ public class Accueil extends AppCompatActivity
             }
         } else {
 
-           // BLE_scan.startScan(mScanCallback);
+            //BLE_scan.startScan(mScanCallback);
         }
 //-----
 

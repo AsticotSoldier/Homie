@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -86,12 +90,12 @@ public class frag_salon extends Fragment {
 
     }
 
-    @Override
+    Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         //--------------
-        View view = inflater.inflate(R.layout.fragment_frag_salon, container, false);
+        final View view = inflater.inflate(R.layout.fragment_frag_salon, container, false);
         Spinner spinner_salon = (Spinner) view.findViewById(R.id.spinner_device_salon);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.device_salon)) {
@@ -103,9 +107,6 @@ public class frag_salon extends Fragment {
 
                 TextView text = (TextView)view.findViewById(android.R.id.text1);
                 text.setTextColor(Color.rgb(144,198,82));
-
-                return view;
-
             }
         };
         final Button connect_button= (Button) view.findViewById(R.id.connect_button_salon);
@@ -121,7 +122,7 @@ public class frag_salon extends Fragment {
                 if (position!=0){
                     texte_select.setTextColor(Color.rgb(144,198,82));
                     connect_button.setVisibility(View.VISIBLE);
-                                  }
+                }
                 else {
                     connect_button.setVisibility(View.INVISIBLE);
                 }
@@ -132,11 +133,103 @@ public class frag_salon extends Fragment {
 
             }
         });
+
+        Acceuil acceuil = (Acceuil) getActivity();
+
+        connect_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Accueil.BLE_scan.startScan(mScanCallback);
+            }
+        });
         return view;
     }
+    private ScanCallback mScanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, final ScanResult result) {
+            super.onScanResult(callbackType, result);
 
 
+            if (result != null) {
+                if (result.getDevice() != null) {
+                    if (result.getDevice().getName() != null) { Log.i("name", result.getDevice().getName().toString());
+                        if (result.getDevice().getName().equals(new String("LED"))) { /* Should be the name of device wanted */
+                            Accueil.BLE_device = result.getDevice();
+                            connectTo(Accueil.BLE_device);
+                        }
+                    }
+                }
+            }
+        }
+    };
+    private void connectTo(BluetoothDevice device) {
+        if(Accueil.mGatt == null) {
+            Accueil.mGatt = device.connectGatt(this, false, gattCallback);
+            Accueil.BLE_scan.stopScan(mScanCallback); /* Once device connected, stop scan for save battery */
+        }
+    }
 
+    private BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
+        @Override
+        public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+            super.onConnectionStateChange(gatt, status, newState);
+
+            /* See https://developer.android.com/reference/android/bluetooth/BluetoothProfile.html#STATE_CONNECTED for value */
+            if (newState == BluetoothProfile.STATE_CONNECTED) { /* If connected */
+                //receiveText.setText("Connected");
+                if (Accueil.mGatt.discoverServices()) {
+                    Log.i("success", "discoverServices lunched");
+                } else {
+                    Log.i("error", "discoverServices not lunched");
+                }
+            }
+            else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                //receiveText.setText("Disconnected");
+                //editText.setText("Error : Android caca");
+            }
+        }
+
+        @Override
+        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+            super.onServicesDiscovered(gatt, status);
+
+            Log.i("Services", "discovered");
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                Log.i("Services", "no error");
+            } else {
+                Log.i("Services", "error");
+            }
+            Log.i("how many", String.valueOf(gatt.getServices().size()));
+
+            for (int i=0 ; i<gatt.getServices().size() ; i++) {
+                Log.i("UUID", gatt.getServices().get(i).getUuid().toString());
+                Log.i("service",gatt.getServices().get(i).getUuid().toString());
+                if (gatt.getServices().get(i).getUuid().toString().contains("9b1001-e8f2-537e-4f6c-d104768a1214")) {
+                    Accueil.BLE_service = gatt.getServices().get(i);
+                    Log.i("servicefound","saucisse");
+                }
+            }
+            if (Accueil.BLE_service != null) {
+                for (int i=0 ; i<Accueil.BLE_service.getCharacteristics().size() ; i++) {
+                    if ((Accueil.BLE_service.getCharacteristics().get(i).getProperties() & (BluetoothGattCharacteristic.PROPERTY_WRITE | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE)) != 0) {
+                        //txCarac = Accueil.BLE_service.getCharacteristics().get(i);
+                        Log.i("txcrac","poulet");
+                    } else if ((Accueil.BLE_service.getCharacteristics().get(i).getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0) {
+                        Accueil.mGatt.setCharacteristicNotification(Accueil.BLE_service.getCharacteristics().get(i), true);
+                    }
+                }
+            } else {
+                //ERROR SERVICE NOT FOUND, CHECK ARDUINO PROGRAM AND GET SERVICES
+            }
+        }
+
+        @Override
+        public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+            super.onCharacteristicChanged(gatt, characteristic);
+
+            //Accueil.receiveText.setText(characteristic.getValue().toString());
+        }
+    };
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -153,7 +246,6 @@ public class frag_salon extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-
     }
 
     @Override
