@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="177d056fc0e117a314aae0f035416b9b415a7e75">
+        sha1="c0ab5609be4a22a28e23c15935327df357e056ae">
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6768f38d2766d20b6a87772f4505e1e98e48b159\classes.dex" />
     </item>
     <item
@@ -106,7 +106,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="6235c2e9d93556082fbdfd52e2cb2704a01b56e5">
+        sha1="8188de0126bb8900e1c0963d963743a2b9cdba6b">
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_4ccf1a74ea1a3648c1235d299814c9574e133cff\classes.dex" />
     </item>
 
