@@ -50,7 +50,7 @@ public class Accueil extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener,frag_kitchen.OnFragmentInteractionListener,
         frag_salon.OnFragmentInteractionListener,frag_restroom.OnFragmentInteractionListener,
         frag_garage.OnFragmentInteractionListener,frag_garden.OnFragmentInteractionListener,
-        frag_bedroom.OnFragmentInteractionListener,frag_bathroom.OnFragmentInteractionListener{
+        frag_bedroom.OnFragmentInteractionListener,frag_bathroom.OnFragmentInteractionListener,rgb_spinning_lay1.OnFragmentInteractionListener{
 
     public static  BluetoothAdapter BLE_Adapter;
     public static BluetoothLeScanner BLE_scan;

@@ -3,7 +3,6 @@
 
 // Import libraries (BLEPeripheral depends on SPI)
 
-
 // define pins (varies per shield/board)
 #define BLE_REQ   22
 #define BLE_RDY   24
@@ -51,10 +50,9 @@ void BLE_init() {
   Serial.println(F("BLE LED Peripheral"));
 }
 
-void loop4() {
+void loop2() {
   // poll peripheral
   blePeripheral.poll();
-  Serial.println("loop4");
   yield();
 }
 
@@ -62,6 +60,7 @@ void blePeripheralConnectHandler(BLECentral& central) {
   // central connected event handler
   Serial.print(F("Connected event, central: "));
   Serial.println(central.address());
+  patternOn=1;
 }
 
 void blePeripheralDisconnectHandler(BLECentral& central) {

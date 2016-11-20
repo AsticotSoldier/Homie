@@ -11,6 +11,15 @@
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.4.0_1da8c362a281180087f795bd38b016fee672e2ac\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.0-alpha9\constraint-layout-solver-1.0.0-alpha9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6a908fd0803cc5f65b007101002aec06dc7544da">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.0-alpha9_cda732d71bf33ff32bcd26365998631c81e129e3.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-alpha9\jars\classes.jar"
         jumboMode="true"
@@ -29,13 +38,40 @@
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_64f1bcc410054828977e379b66a9ceea7bcd2000\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_1da8c362a281180087f795bd38b016fee672e2ac.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="c0ab5609be4a22a28e23c15935327df357e056ae">
+        sha1="d9feab8ea1dd63988260bb1d30810d07bad1b14b">
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6768f38d2766d20b6a87772f4505e1e98e48b159\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_64f1bcc410054828977e379b66a9ceea7bcd2000.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.4.0_ff65a13b9630553d5a5e4ece8c9b304baf8780b9.jar" />
     </item>
     <item
         is-multidex="true"
@@ -45,6 +81,15 @@
         revision="23.0.2"
         sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_6834c91d6e765279535e1b1dcdcdaa18074bb586\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_62b93ac11437f3e209b253ed112bac22c8ae4078.jar" />
     </item>
     <item
         is-multidex="true"
@@ -83,6 +128,15 @@
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.0-alpha9_cda732d71bf33ff32bcd26365998631c81e129e3\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-alpha9\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="f2b64f6a762f61a2379d6a79af03e2ee56eefe0b">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\com.android.support.constraint-constraint-layout-1.0.0-alpha9_2628bcef3a677431e5b19223854ba1d44bf68704.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
         jumboMode="true"
@@ -101,13 +155,49 @@
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.4.0_3ef775ce645f05cc439f23722ae4ec4551d179a3\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_527c61971051066a709e72282407e58490193d13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_b116049242d1ad982227c352a3e9f36ecf76ae95.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_6834c91d6e765279535e1b1dcdcdaa18074bb586.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="8188de0126bb8900e1c0963d963743a2b9cdba6b">
+        sha1="12531468107c8bc77ef15189438d70bf7e8dd50d">
         <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_4ccf1a74ea1a3648c1235d299814c9574e133cff\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="C:\Users\Pierre-Yves\Documents\GitHub\Homie\Java\Homie\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.4.0_3ef775ce645f05cc439f23722ae4ec4551d179a3.jar" />
     </item>
 
 </items>

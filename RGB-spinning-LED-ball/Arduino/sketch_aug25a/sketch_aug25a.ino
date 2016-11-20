@@ -25,52 +25,20 @@
 #include <BLEPeripheral.h>
 
 boolean initial=0;
-
+boolean patternOn=0;
 index_led memory;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(250000);
   while (!Serial);
-Serial.println("prog start");
+  Serial.println("prog start");
   randomSeed(analogRead(0));
+  BLE_init();
   Scheduler.startLoop(loop2);
-  Scheduler.startLoop(loop3);
-  Scheduler.startLoop(loop4);
 }
 
 void loop() {
-  
-  int switch_mode=1;
-
-  switch (switch_mode) {
-    case 1:
-     mode_auto(initial,1);
-
-      break;
-    case 2:
-     //to do
-      break;
-    case 3:
-      //to do
-    break;
-    case 4:
-      //to do
-    break;
-    Serial.println("loop1");
-    yield();
-  }
-
-initial=1;
+  mode_auto(initial);
+  yield();
 }
 
-void loop2(){
-mode_auto(initial,2);
-Serial.println("loop2");
-yield();
-}
-
-void loop3(){
-mode_auto(initial,3);
-Serial.println("loop3");
-yield();
-}

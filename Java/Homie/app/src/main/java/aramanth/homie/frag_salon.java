@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +30,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.Manifest;
@@ -56,8 +56,6 @@ public class frag_salon extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private Inflater inflater;
-
-
 
     public frag_salon() {
     }
@@ -111,6 +109,7 @@ public class frag_salon extends Fragment {
                 return view;
 
             }
+
         };
         final Button connect_button= (Button) view.findViewById(R.id.connect_button_salon);
 
@@ -119,6 +118,7 @@ public class frag_salon extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView texte_select =(TextView) parent.getChildAt(0);
+
                 if (texte_select!=null){
                     texte_select.setTextColor(Color.rgb(144,198,82));
                 }
@@ -167,77 +167,92 @@ public class frag_salon extends Fragment {
     };
     private void connectTo(BluetoothDevice device) {
         if(Accueil.mGatt == null) {
-            Accueil.mGatt = device.connectGatt(getContext(), false, gattCallback);
+            Accueil.mGatt = device.connectGatt(getContext(), false, gattCallback.get());
             Accueil.BLE_scan.stopScan(mScanCallback); /* Once device connected, stop scan for save battery */
         }
     }
 
-    private BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
+    private final ThreadLocal<BluetoothGattCallback> gattCallback = new ThreadLocal<BluetoothGattCallback>() {
         @Override
-        public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
-            super.onConnectionStateChange(gatt, status, newState);
-            TextView connection_state= (TextView) getView().findViewById(R.id.connection_state);
+        protected BluetoothGattCallback initialValue() {
+            return new BluetoothGattCallback() {
+                @Override
+                public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+                    super.onConnectionStateChange(gatt, status, newState);
+                    final TextView connection_state = (TextView) getView().findViewById(R.id.connection_state);
+                    final Button Next_button = (Button) getView().findViewById(R.id.next_button);
+
             /* See https://developer.android.com/reference/android/bluetooth/BluetoothProfile.html#STATE_CONNECTED for value */
-            if (newState == BluetoothProfile.STATE_CONNECTED) { /* If connected */
-                //receiveText.setText("Connected");
+                    if (newState == BluetoothProfile.STATE_CONNECTED) {
 
-               /* try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-                connection_state.setVisibility(View.VISIBLE);
-                connection_state.setText("connexion établie");
-                if (Accueil.mGatt.discoverServices()) {
-                    Log.i("success", "discoverServices lunched");
-                } else {
-                    Log.i("error", "discoverServices not lunched");
-                }
-            }
-            else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                connection_state.setVisibility(View.VISIBLE);
-                connection_state.setText("connexion non établie");
-            }
-        }
+                        Log.i("tst", "0");
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Next_button.setVisibility(View.VISIBLE);
+                                connection_state.setVisibility(View.VISIBLE);
+                                connection_state.setText("connexion établie");
+                                final FragmentManager fm = getActivity().getSupportFragmentManager();
+                                Next_button.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        fm.beginTransaction().replace(R.id.drawer_layout, new rgb_spinning_lay1()).commit();
+                                    }
+                                });
 
-        @Override
-        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-            super.onServicesDiscovered(gatt, status);
-
-            Log.i("Services", "discovered");
-            if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.i("Services", "no error");
-            } else {
-                Log.i("Services", "error");
-            }
-            Log.i("how many", String.valueOf(gatt.getServices().size()));
-
-            for (int i=0 ; i<gatt.getServices().size() ; i++) {
-                Log.i("UUID", gatt.getServices().get(i).getUuid().toString());
-                Log.i("service",gatt.getServices().get(i).getUuid().toString());
-                if (gatt.getServices().get(i).getUuid().toString().contains("9b1001-e8f2-537e-4f6c-d104768a1214")) {
-                    Accueil.BLE_service = gatt.getServices().get(i);
-
-                }
-            }
-            if (Accueil.BLE_service != null) {
-                for (int i=0 ; i<Accueil.BLE_service.getCharacteristics().size() ; i++) {
-                    if ((Accueil.BLE_service.getCharacteristics().get(i).getProperties() & (BluetoothGattCharacteristic.PROPERTY_WRITE | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE)) != 0) {
-
-                    } else if ((Accueil.BLE_service.getCharacteristics().get(i).getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0) {
-                        Accueil.mGatt.setCharacteristicNotification(Accueil.BLE_service.getCharacteristics().get(i), true);
+                            }
+                        });
+                        Log.i("tst", "1");
+                        if (Accueil.mGatt.discoverServices()) {
+                            Log.i("success", "discoverServices lunched");
+                        } else {
+                            Log.i("error", "discoverServices not lunched");
+                        }
+                    } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                        connection_state.setVisibility(View.VISIBLE);
+                        connection_state.setText("connexion non établie");
                     }
                 }
-            } else {
-                //ERROR SERVICE NOT FOUND, CHECK ARDUINO PROGRAM AND GET SERVICES
-            }
-        }
 
-        @Override
-        public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-            super.onCharacteristicChanged(gatt, characteristic);
+                @Override
+                public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+                    super.onServicesDiscovered(gatt, status);
 
-            //Accueil.receiveText.setText(characteristic.getValue().toString());
+                    Log.i("Services", "discovered");
+                    if (status == BluetoothGatt.GATT_SUCCESS) {
+                        Log.i("Services", "no error");
+                    } else {
+                        Log.i("Services", "error");
+                    }
+                    Log.i("how many", String.valueOf(gatt.getServices().size()));
+
+                    for (int i = 0; i < gatt.getServices().size(); i++) {
+                        Log.i("UUID", gatt.getServices().get(i).getUuid().toString());
+                        Log.i("service", gatt.getServices().get(i).getUuid().toString());
+                        if (gatt.getServices().get(i).getUuid().toString().contains("9b1001-e8f2-537e-4f6c-d104768a1214")) {
+                            Accueil.BLE_service = gatt.getServices().get(i);
+                        }
+                    }
+                    if (Accueil.BLE_service != null) {
+                        for (int i = 0; i < Accueil.BLE_service.getCharacteristics().size(); i++) {
+                            if ((Accueil.BLE_service.getCharacteristics().get(i).getProperties() & (BluetoothGattCharacteristic.PROPERTY_WRITE | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE)) != 0) {
+
+                            } else if ((Accueil.BLE_service.getCharacteristics().get(i).getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0) {
+                                Accueil.mGatt.setCharacteristicNotification(Accueil.BLE_service.getCharacteristics().get(i), true);
+                            }
+                        }
+                    } else {
+                        //ERROR SERVICE NOT FOUND, CHECK ARDUINO PROGRAM AND GET SERVICES
+                    }
+                }
+
+                @Override
+                public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+                    super.onCharacteristicChanged(gatt, characteristic);
+
+                    //Accueil.receiveText.setText(characteristic.getValue().toString());
+                }
+            };
         }
     };
     // TODO: Rename method, update argument and hook method into UI event
